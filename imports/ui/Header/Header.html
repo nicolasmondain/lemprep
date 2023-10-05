@@ -1,0 +1,17 @@
+<template name="header">
+	<header class="bg-white">
+		<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 px-8" aria-label="Global">
+			<div class="flex gap-x-12">
+				<a href="/" class="text-sm font-semibold leading-6 text-gray-900">lemprep</a>
+				<a href="/campaigns/list" class="text-sm font-semibold leading-6 text-gray-900">campaigns</a>
+			</div>
+			<div class="flex flex-1 justify-end">
+				{{#if isAuthenticated}}
+					<a class="cursor-pointer text-sm font-semibold leading-6 text-gray-900 logout">logout <span aria-hidden="true">&rarr;</span></a>
+				{{else}}
+					<a href="/account/sign-in" class="text-sm font-semibold leading-6 text-gray-900">sign-in <span aria-hidden="true">&rarr;</span></a>
+				{{/if}}
+			</div>
+		</nav>
+	</header>
+</template>

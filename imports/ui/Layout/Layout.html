@@ -1,0 +1,18 @@
+<template name="layout">
+	{{> Template.dynamic template=header}}
+  <aside>
+    <nav>
+      <!-- sidebar -->
+    </nav>
+  </aside>
+
+	<div class="container mx-auto">
+  	<main>
+    	{{> yield}}
+  	</main>
+	</div>
+
+  <footer>
+  {{> Template.dynamic template=footer}}
+  </footer>
+</template>
