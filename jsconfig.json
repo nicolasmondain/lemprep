@@ -94,6 +94,9 @@
         "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/logging/1.3.2/web.browser/logging_browser.js",
         "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/logging/1.3.2/web.browser/logging_cordova.js",
         "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/logging/1.3.2/web.browser/logging_server.js"
+      ],
+      "meteor/littledata:synced-cron": [
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/littledata_synced-cron/1.5.1/web.browser/synced-cron-server.js"
       ]
     }
   },

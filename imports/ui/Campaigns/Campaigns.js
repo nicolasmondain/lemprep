@@ -29,6 +29,11 @@ Template.campaigns.helpers({
 
 		return CampaignsCollection.find({}).fetch();
 
+	},
+	isCampaignActive(active){
+
+		return active ? 'active' : 'inactive';
+
 	}
 
 });

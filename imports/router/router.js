@@ -117,8 +117,6 @@ const campaigns = FlowRouter.group({
 
 			FlowRouter.go('signin');
 
-			return;
-
 		}
 
   }]

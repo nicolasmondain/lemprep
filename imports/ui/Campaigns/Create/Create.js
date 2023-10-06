@@ -17,11 +17,12 @@ Template.create.events({
 
 		event.preventDefault();
 
-		const name  = event.target.name.value;
-		const start = event.target.start.value;
-		const end   = event.target.end.value;
+		const name   = event.target.name.value;
+		const start  = event.target.start.value;
+		const end    = event.target.end.value;
+		const active = event.target.active.checked;
 
-		Meteor.call('campaign.create', {name, start, end}, (error) => {
+		Meteor.call('campaign.create', {name, start, end, active}, (error) => {
 
 			if(error){
 

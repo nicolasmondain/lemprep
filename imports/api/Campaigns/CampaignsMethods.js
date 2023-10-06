@@ -3,7 +3,7 @@ import {CampaignsCollection} from './CampaignsCollection';
 
 Meteor.methods({
 
-		'campaign.create'({name, start, end}){
+		'campaign.create'({name, start, end, active}){
 
 			if(!Meteor.userId()){
 
@@ -16,15 +16,18 @@ Meteor.methods({
 				name,
 				start,
 				end,
+				active,
 				createdAt: new Date(),
 				owner    : {email: Meteor.user().emails[0].address, _id: Meteor.userId()}
 
 			});
 
 		},
-		'campaign.update'({_id, name, start, end}){
+		'campaign.update'({_id, name, start, end, active}){
 
-			if(!Meteor.userId()){
+			const campaign = CampaignsCollection.findOne({_id});
+
+			if(!Meteor.userId() || campaign.owner._id !== Meteor.userId()){
 
 				throw new Meteor.Error('Not authorized');
 
@@ -41,7 +44,7 @@ Meteor.methods({
 				name,
 				start,
 				end,
-				createdAt: new Date(),
+				active,
 				owner    : {email: Meteor.user().emails[0].address, _id: Meteor.userId()}
 
 			});

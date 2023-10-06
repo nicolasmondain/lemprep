@@ -75,8 +75,7 @@ However, we can write publications that are properly reactive to changes across 
 
 ## Cron
 
-* https://stackoverflow.com/questions/40687237/cron-jobs-in-meteor
-* https://forums.meteor.com/t/how-to-bind-meteor-for-cron-job/47120/2
+* https://github.com/percolatestudio/meteor-synced-cron
 
 ## Imports dynamiques
 

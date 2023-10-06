@@ -50,15 +50,16 @@ Template.campaign.events({
 
 		event.preventDefault();
 
-		const name  = event.target.name.value;
-		const start = event.target.start.value;
-		const end   = event.target.end.value;
+		const name   = event.target.name.value;
+		const start  = event.target.start.value;
+		const end    = event.target.end.value;
+		const active = event.target.active.checked;
 
 		// @ts-ignore
 
 		const _id = FlowRouter.getParam('_id');
 
-		Meteor.call('campaign.update', {_id, name, start, end}, (error) => {
+		Meteor.call('campaign.update', {_id, name, start, end, active}, (error) => {
 
 			if(error){
 
