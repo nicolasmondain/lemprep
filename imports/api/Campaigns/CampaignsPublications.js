@@ -1,23 +1,11 @@
-import { Meteor } from 'meteor/meteor';
-import { CampaignsCollection } from './CampaignsCollection';
+import {Meteor} from 'meteor/meteor';
 
-Meteor.publish('campaigns', function(){
+import {CampaignsCollection} from './CampaignsCollection';
 
-	return CampaignsCollection.find({
-
-		'owner._id': this.userId
-
-	});
-
-});
-
-Meteor.publish('campaign', function(campaignId){
-
-	check(campaignId, String);
+Meteor.publish('campaigns', function publishCampaigns(){
 
 	return CampaignsCollection.find({
 
-		_id          : campaignId,
 		'owner._id': this.userId
 
 	});

@@ -1,9 +1,9 @@
-import { Meteor } from 'meteor/meteor';
-import { CampaignsCollection } from './CampaignsCollection';
+import {Meteor} from 'meteor/meteor';
+import {CampaignsCollection} from './CampaignsCollection';
 
 Meteor.methods({
 
-		'campaigns.create.submit'({name, owner}){
+		'campaign.create'({name, start, end}){
 
 			if(!Meteor.userId()){
 
@@ -11,17 +11,57 @@ Meteor.methods({
 
 			}
 
-			const _id = CampaignsCollection.insert({
+			return CampaignsCollection.insert({
 
 				name,
-				owner,
-				start    : new Date(),
-				end      : new Date(),
-				createdAt: new Date()
+				start,
+				end,
+				createdAt: new Date(),
+				owner    : {email: Meteor.user().emails[0].address, _id: Meteor.userId()}
 
 			});
 
-			return _id;
+		},
+		'campaign.update'({_id, name, start, end}){
+
+			if(!Meteor.userId()){
+
+				throw new Meteor.Error('Not authorized');
+
+			}
+
+			if(!_id){
+
+				throw new Meteor.Error('_id is required');
+
+			}
+
+			return CampaignsCollection.update(_id, {
+
+				name,
+				start,
+				end,
+				createdAt: new Date(),
+				owner    : {email: Meteor.user().emails[0].address, _id: Meteor.userId()}
+
+			});
+
+		},
+		'campaign.remove'(_id){
+
+			if(!Meteor.userId()){
+
+				throw new Meteor.Error('Not authorized');
+
+			}
+
+			if(!_id){
+
+				throw new Meteor.Error('_id is required');
+
+			}
+
+			return CampaignsCollection.remove(_id);
 
 		}
 

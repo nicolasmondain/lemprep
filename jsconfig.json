@@ -88,6 +88,12 @@
       ],
       "meteor/kadira:blaze-layout": [
         "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/kadira_blaze-layout/2.0.1/web.browser//packages/kadira_blaze-layout.js"
+      ],
+      "meteor/logging": [
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/logging/1.3.2/web.browser/logging.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/logging/1.3.2/web.browser/logging_browser.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/logging/1.3.2/web.browser/logging_cordova.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/logging/1.3.2/web.browser/logging_server.js"
       ]
     }
   },

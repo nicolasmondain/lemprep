@@ -1,5 +1,6 @@
 import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
+import {Log} from 'meteor/logging'
 
 import './Header.html';
 
@@ -23,7 +24,7 @@ Template.header.events({
 
 			if(errorResponse){
 
-				console.log(errorResponse);
+				Log(errorResponse);
 
 				return;
 

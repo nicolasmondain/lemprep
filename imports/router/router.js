@@ -151,33 +151,7 @@ campaigns.route('/list/', {
 
 });
 
-campaigns.route('/:id', {
-
-  name: 'campaign',
-	waitOn(){
-
-    return [
-
-      import('../ui/Header/Header'),
-      import('../ui/Campaigns/Campaign/Campaign'),
-			import('../ui/Footer/Footer')
-
-    ];
-  },
-  action(params, qs){
-
-		this.render('layout', 'campaign', Object.assign({
-
-      header: 'header',
-			footer: 'footer'
-
-    }, params, qs));
-
-  }
-
-});
-
-campaigns.route('/create', {
+campaigns.route('/create/', {
 
   name: 'create',
   waitOn(){
@@ -198,6 +172,32 @@ campaigns.route('/create', {
 			footer: 'footer'
 
     });
+
+  }
+
+});
+
+campaigns.route('/:_id', {
+
+  name: 'campaign',
+	waitOn(){
+
+    return [
+
+      import('../ui/Header/Header'),
+      import('../ui/Campaigns/Campaign/Campaign'),
+			import('../ui/Footer/Footer')
+
+    ];
+  },
+  action(params, qs){
+
+		this.render('layout', 'campaign', Object.assign({
+
+      header: 'header',
+			footer: 'footer'
+
+    }, params, qs));
 
   }
 

@@ -1,5 +1,6 @@
 import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
+import {Log} from 'meteor/logging'
 
 
 import './Signin.html';
@@ -17,7 +18,7 @@ Template.signin.events({
 
 			if(errorResponse){
 
-				console.log(errorResponse);
+				Log(errorResponse);
 
 				return;
 
@@ -27,7 +28,7 @@ Template.signin.events({
 
 		});
 
-		console.log(user);
+		Log(user);
 
 	}
 

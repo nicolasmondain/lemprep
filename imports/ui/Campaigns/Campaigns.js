@@ -1,6 +1,6 @@
-import { Template } from 'meteor/templating';
+import {Template} from 'meteor/templating';
 
-import { CampaignsCollection } from '../../api/Campaigns/CampaignsCollection.js';
+import {CampaignsCollection} from '../../api/Campaigns/CampaignsCollection.js';
 
 import './Campaigns.html';
 import './Campaign/Campaign.js';
@@ -28,11 +28,6 @@ Template.campaigns.helpers({
 	campaigns(){
 
 		return CampaignsCollection.find({}).fetch();
-
-	},
-	getIdFromObjectId(objectId){
-
-		return objectId._str;
 
 	}
 

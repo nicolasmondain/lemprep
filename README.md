@@ -68,6 +68,8 @@ EJSON is an extension of JSON to support more types.
 
 ## Publications with join (and reactive)
 
+However, we can write publications that are properly reactive to changes across collections. To do this, we use the reywood:publish-composite package.
+
 * https://guide.meteor.com/data-loading.html#publishing-relations
 * https://stackoverflow.com/questions/20871496/meteor-reactive-join-with-publish-with-relations-package
 

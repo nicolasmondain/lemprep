@@ -1,4 +1,5 @@
 import {Template} from 'meteor/templating';
+import {Log} from 'meteor/logging'
 
 import './Signup.html';
 
@@ -12,14 +13,14 @@ Template.signup.events({
 		const email    = event.target.email.value;
 		const password = event.target.password.value;
 
-		console.log(email, password);
-		console.log(event);
+		Log(email, password);
+		Log(event);
 
 		Meteor.call('account.create.submit', {email, password}, (errorResponse) => {
 
 			if(errorResponse){
 
-				console.log(errorResponse.error);
+				Log(errorResponse.error);
 
 			}
 
