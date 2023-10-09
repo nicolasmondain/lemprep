@@ -10,7 +10,7 @@ import '/imports/api/Account/AccountMethods';
 import '/imports/api/Campaigns/CampaignsMethods';
 import '/imports/api/Campaigns/CampaignsPublications';
 
-SyncedCron.config({collectionName: 'campaignsCron'});
+SyncedCron.config({collectionName: 'cron'});
 
 SyncedCron.add({
 
@@ -29,6 +29,10 @@ SyncedCron.add({
 
 			const campaign  = campaigns[i];
 			const {actions} = campaign;
+
+			// on pousse les actions à effectuer dans une queue mongoDB
+			// qui servira également de report pour une période définie (Time To Live Indexes)
+
 
 		}
 
