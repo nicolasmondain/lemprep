@@ -1,12 +1,11 @@
 import {Template} from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
-
 import {helpers, events} from '/imports/modules/template';
+import {collapsibleTree} from '/imports/modules/d3';
 
 import './CampaignEdition.html';
 
-const DEFAULT_ACTION = {value: {}, children: []};
-const INPUTS         = [
+const INPUTS = [
 
 	{name: 'name', selector: '#name', events: ['input', 'click']},
 	{name: 'start', selector: '#start', events: ['input']},
@@ -15,38 +14,120 @@ const INPUTS         = [
 
 ];
 
+const DEFAULT_ACTION = {
+
+	action  : 'action 0',
+	root    : true,
+	children: [
+
+		{
+			action: 'action 1 - a',
+			children: []
+		},
+		{
+			action: 'action 1 - b',
+			children: [
+
+				{
+					action: 'action 2',
+					children: []
+				}
+
+			]
+		}
+	]
+};
+
 Template.campaignedition.onCreated(function() {
 
-	this.form = new ReactiveDict();
+	this.editing = new ReactiveDict();
 
-	this.form.set(Template.currentData().campaign);
+	this.editing.set(Template.currentData().campaign);
 
 });
 
-Template.campaignedition.helpers(helpers('form', INPUTS));
+Template.campaignedition.helpers(Object.assign({}, helpers('editing', INPUTS), {
 
-Template.campaignedition.events(Object.assign({}, events('form', INPUTS), {
+	actions(){
+
+		const instance = Template.instance();
+		const actions  = instance['editing'].get('actions');
+
+		return actions;
+
+	},
+	actionsToString(){
+
+		const instance = Template.instance();
+		const actions  = instance['editing'].get('actions');
+
+		return JSON.stringify(actions);
+
+	},
+	actionsToArray(){
+
+		const array    = [];
+		const instance = Template.instance();
+		const actions  = instance['editing'].get('actions');
+		const iterate  = (action, index) => {
+
+			const current = JSON.parse(JSON.stringify(action));
+
+			if(Object.prototype.hasOwnProperty.call(current, 'children') && Array.isArray(current.children) && current.children.length){
+
+				if(!array[index]){
+
+					array[index] = [];
+
+				}
+
+				for(let i = 0; i < current.children.length; i += 1){
+
+					array[index].push(current.children[i]);
+
+					iterate(current.children[i], index + 1);
+
+				}
+
+			}
+
+		};
+
+		if(actions){
+
+			array.push([{action: actions.action}]);
+
+			iterate(actions, array.length);
+
+			console.log(array);
+
+		}
+
+		return array;
+
+	}
+
+}));
+
+Template.campaignedition.events(Object.assign({}, events('editing', INPUTS), {
 
 	'click #add-action'(event, template){
 
 		event.preventDefault();
 
-		console.log(template);
+		const instance = Template.instance();
 
-		// This property provides access to the data context at the top level of the template.
-		// It is updated each time the template is re-rendered. Access is read-only and non-reactive.
+		instance['editing'].set('actions', DEFAULT_ACTION);
 
-		const {campaign} = template.data;
+		const d3Node = document.getElementById('d3');
 
-		if(!campaign.actions){
+		if(d3Node){
 
-			campaign.actions = DEFAULT_ACTION;
+			d3Node.innerHTML = '';
+
+			d3Node.appendChild(collapsibleTree(instance['editing'].get('actions')));
 
 		}
-
-		const test = Template.currentData();
-
-		console.log('test', test);
 
 	}
 

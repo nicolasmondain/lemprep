@@ -33,6 +33,11 @@
 					</div>
 				</div>
 				<div class="col-span-full">
+					<div id="d3"></div>
+					{{#each a in actionsToArray}}
+						<p>test - {{a}}</p>
+					{{/each}}
+					<pre>actions => {{actionsToString}}</pre>
 					<button id="add-action" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">add action</button>
 				</div>
 			</div>
