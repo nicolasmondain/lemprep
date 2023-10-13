@@ -12,14 +12,7 @@ Template.campaigns.onCreated(function() {
 	// subscriptionsReady() function to the template instance, which is true when all
 	// subscriptions made inside this template are ready.
 
-	// Calling this.autorun sets up a reactive context which will re-initialize the
-	// subscription whenever the reactive function this.getListId() changes.
-
-	this.autorun(() => {
-
-		this.subscribe('campaigns');
-
-	});
+	this.subscribe('campaigns');
 
 });
 

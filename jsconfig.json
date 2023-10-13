@@ -97,6 +97,14 @@
       ],
       "meteor/littledata:synced-cron": [
         "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/littledata_synced-cron/1.5.1/web.browser/synced-cron-server.js"
+      ],
+      "meteor/meteortesting:mocha": [
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/meteortesting_mocha/2.1.0/web.browser/client.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/meteortesting_mocha/2.1.0/web.browser/browser-shim.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/meteortesting_mocha/2.1.0/web.browser/prepForHTMLReporter.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/meteortesting_mocha/2.1.0/web.browser/runtimeArgs.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/meteortesting_mocha/2.1.0/web.browser/server.handleCoverage.js",
+        "C:\\Users\\nicol\\AppData\\Local/.meteor/packages/meteortesting_mocha/2.1.0/web.browser/server.js"
       ]
     }
   },

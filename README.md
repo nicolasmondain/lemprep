@@ -86,15 +86,16 @@ However, we can write publications that are properly reactive to changes across 
 ## Trackers.autorun()
 
 * https://docs.meteor.com/api/tracker.html
+* https://forums.meteor.com/t/when-and-how-to-use-this-autorun/26075/2
+* https://forums.meteor.com/t/allow-autorun-update-infinite-loop/3677
 
+## Quand ne pas faire de la réactivité
 
-- l'usage des Trackers.autorun() (à quoi ça sert, pourquoi il faut pas les sur-utiliser)
+* load data once (eg. article content)
+* editing mongoDB collection (form)
+* subscriptions without parameters
 
-
-
-
-
-- quand NE PAS faire de la réactivité
+* https://docs.meteor.com/api/tracker.html#Tracker-nonreactive
 
 - c'est quoi une low level collection et comment tu la déclares, comment tu accèdes à la db sans passer par la surcouche Meteor
 

@@ -27,3 +27,4 @@ accounts-password
 ostrio:flow-router-extra
 logging
 littledata:synced-cron
+meteortesting:mocha

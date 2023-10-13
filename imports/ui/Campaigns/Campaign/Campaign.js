@@ -16,12 +16,14 @@ Template.campaign.onCreated(function() {
 
 	// Calling this.autorun sets up a reactive context which will re-initialize the
 	// subscription whenever the reactive function this.getListId() changes.
+	// https://guide.meteor.com/data-loading.html#changing-arguments
+	// this example would need need this.autorun() to be called again if the getParam('_id') changes
 
-	this.autorun(() => {
+	// this.autorun(() => {
 
 		this.subscribe('campaigns');
 
-	});
+	// });
 
 });
 
