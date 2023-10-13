@@ -1,7 +1,8 @@
 import {Template} from 'meteor/templating';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import {helpers, events} from '/imports/modules/template';
-import {collapsibleTree} from '/imports/modules/d3';
+
+let collapsibleTree = null;
 
 import './CampaignEdition.html';
 
@@ -43,6 +44,27 @@ Template.campaignedition.onCreated(function() {
 	this.editing = new ReactiveDict();
 
 	this.editing.set(Template.currentData().campaign);
+
+});
+
+Template.campaignedition.onRendered(async function() {
+
+	const actions = this.editing.get('actions');
+
+	if(actions && Object.prototype.hasOwnProperty.call(actions, 'action') && Object.prototype.hasOwnProperty.call(actions, 'children')){
+
+		const d3Node = document.getElementById('d3');
+
+		if(d3Node){
+
+			({collapsibleTree} = collapsibleTree ? {collapsibleTree} : await import('/imports/modules/d3'));
+
+			d3Node.innerHTML = '';
+
+			d3Node.appendChild(collapsibleTree(actions));
+
+		}
+	}
 
 });
 
@@ -111,7 +133,7 @@ Template.campaignedition.helpers(Object.assign({}, helpers('editing', INPUTS), {
 
 Template.campaignedition.events(Object.assign({}, events('editing', INPUTS), {
 
-	'click #add-action'(event, template){
+	async 'click #add-action'(event, template){
 
 		event.preventDefault();
 
@@ -122,6 +144,8 @@ Template.campaignedition.events(Object.assign({}, events('editing', INPUTS), {
 		const d3Node = document.getElementById('d3');
 
 		if(d3Node){
+
+			({collapsibleTree} = collapsibleTree ? {collapsibleTree} : await import('/imports/modules/d3'));
 
 			d3Node.innerHTML = '';
 
