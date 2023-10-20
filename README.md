@@ -125,7 +125,6 @@ Load test: Finally you may wish to test that your application works under typica
 meteor test
 ```
 
-
 * https://guide.meteor.com/testing
 * tests unitaires avec Meteor
 
@@ -579,3 +578,78 @@ You can aggregate results by score using the $meta projection operator
 db.crew.find({$text: {$search: {"technical Anna"}}}, {score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
 
 ```
+The $text operator can have 4 fields :
+* $search: search to be done
+* language: language of the query
+* CaseSensitive
+* DiacriticSensitive
+
+Search with AND / OR / AND NOT
+
+```shell
+# bedroom AND apartment (surrounded by exscaped double quotes)
+db.crew.find({$text: {$search: {"/"bedroom apartment/""}}})
+# bedroom OR apartment OR sunny
+db.crew.find({$text: {$search: {"bedroom apartment sunny"}}})
+# sunny OR bedroom OR apartment AND bedroom apartment
+# NOT RECOMMENDED (mix)
+db.crew.find({$text: {$search: {"sunny \"bedroom apartment\""}}})
+# bedroom AND NOT apartment
+db.crew.find({$text: {$search: {"bedroom -apartment"}}})
+
+
+```
+
+#### Working with arrays
+
+array equality operator
+
+```shell
+# query for an element
+# find({arrayField: "value"})
+# find documents where array includes "technical"
+db.creew.find({skills: "technical"})
+
+# query for whole array
+# find({arrayField: [v1, v2]})
+# find documents where skills is exactly this array : ["technical"]
+# notes : the order matters ["v1", "v2"] != ["v2", "v1"]
+db.creew.find({skills: ["technical"]})
+```
+
+array query operators
+
+* $all : matches arrays that contain all the elements in a provided list, regardless of the order
+* $size: matches arrays where the size is equal to the given value
+* $elemMatch : returns arrays where an element matches mulitple conditions (array of objects)
+
+```shell
+db.crew.find({sills: {$all: ["technical", "sales"]}})
+db.crew.find({skills: {$size: 2}})
+db.crew.find({skills: {$elemMatch: {name: "", lvl: {$gt: 7}}}})
+```
+
+array projection operators
+
+* $slice: limits the number of items in an array that a query returns
+* $ : given the fact that you have an array field in the query document, the $ operator limits the array content to the first N elements that matches the query condition
+* $elemMatch: display only the firsy element to match the projection condition
+
+```shell
+db.crew.find({}, {skills: {$slice: 1}})
+# skip 1, display 1
+db.crew.find({}, {skills: {$slice: [1, 1]}})
+
+```
+
+```shell
+db.crew.find({skills: "management", {"skills.$": 1}})
+
+```
+
+```shell
+db.crew.find({skills: "management", {$elemMatch: {lvl: {$gt: 7}}}})
+
+```
+## Searching for text in mongoDB 4
+
