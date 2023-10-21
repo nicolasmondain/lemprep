@@ -1,8 +1,8 @@
 import {Template} from 'meteor/templating';
+import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 import {Log} from 'meteor/logging'
 
 import './Signup.html';
-
 
 Template.signup.events({
 
@@ -13,16 +13,17 @@ Template.signup.events({
 		const email    = event.target.email.value;
 		const password = event.target.password.value;
 
-		Log(email, password);
-		Log(event);
-
-		Meteor.call('account.create.submit', {email, password}, (errorResponse) => {
+		Meteor.call('account.signup.submit', {email, password}, (errorResponse) => {
 
 			if(errorResponse){
 
-				Log(errorResponse.error);
+				Log(errorResponse);
+
+				return;
 
 			}
+
+			FlowRouter.go('signin');
 
 		});
 
