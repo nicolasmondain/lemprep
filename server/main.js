@@ -33,7 +33,6 @@ SyncedCron.add({
 			// on pousse les actions à effectuer dans une queue mongoDB
 			// qui servira également de report pour une période définie (Time To Live Indexes)
 
-
 		}
 
   }

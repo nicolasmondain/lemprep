@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {CampaignsCollection} from './CampaignsCollection';
+import {CampaignsSchema} from './CampaignsSchema';
 
 Meteor.methods({
 
@@ -11,7 +12,7 @@ Meteor.methods({
 
 			}
 
-			return CampaignsCollection.insert({
+			const campaign = {
 
 				name,
 				start,
@@ -20,14 +21,18 @@ Meteor.methods({
 				createdAt: new Date(),
 				owner    : {email: Meteor.user().emails[0].address, _id: Meteor.userId()}
 
-			});
+			};
+
+			CampaignsSchema.validate(campaign);
+
+			return CampaignsCollection.insert(campaign);
 
 		},
 		'campaign.update'({_id, name, start, end, active}){
 
-			const campaign = CampaignsCollection.findOne({_id});
+			const existing = CampaignsCollection.findOne({_id});
 
-			if(!Meteor.userId() || campaign.owner._id !== Meteor.userId()){
+			if(!Meteor.userId() || existing.owner._id !== Meteor.userId()){
 
 				throw new Meteor.Error('Not authorized');
 
@@ -39,7 +44,7 @@ Meteor.methods({
 
 			}
 
-			return CampaignsCollection.update(_id, {
+			const campaign = {
 
 				name,
 				start,
@@ -47,7 +52,11 @@ Meteor.methods({
 				active,
 				owner    : {email: Meteor.user().emails[0].address, _id: Meteor.userId()}
 
-			});
+			};
+
+			CampaignsSchema.validate(campaign);
+
+			return CampaignsCollection.update(_id, campaign);
 
 		},
 		'campaign.remove'(_id){
