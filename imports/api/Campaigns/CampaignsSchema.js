@@ -1,5 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 
+import '../../../infra/CustomError';
+
 export const CampaignsSchema = new SimpleSchema({
 
 	name     : {type: String, max: 200},

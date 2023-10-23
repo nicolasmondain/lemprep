@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base'
+import {AccountSchema} from './AccountSchema';
 
 Meteor.methods({
 
@@ -11,13 +12,17 @@ Meteor.methods({
 
 		}
 
-		const _id = Accounts.createUser({
+		const user = {
 
 			email,
 			password,
 			profile
 
-		});
+		};
+
+		AccountSchema.validate(user);
+
+		const _id = Accounts.createUser(user);
 
 		return _id;
 
