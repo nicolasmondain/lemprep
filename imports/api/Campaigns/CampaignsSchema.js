@@ -1,6 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 
-import '../../../infra/CustomError';
+import '../../infra/CustomError';
 
 export const CampaignsSchema = new SimpleSchema({
 
